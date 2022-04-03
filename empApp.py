@@ -25,7 +25,7 @@ def home():
     return render_template('index.html')
 
 @app.route("/addemp", methods=['POST'])
-def AddEmp():
+def index():
     empID = request.form['empID']
     fName = request.form['fName']
     lName = request.form['lName']
@@ -35,7 +35,7 @@ def AddEmp():
     
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %d, $s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %d, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -45,7 +45,7 @@ def AddEmp():
 
         cursor.execute(insert_sql, (empID, fName, lName, position, payscale, hireDate))
         db_conn.commit()
-        emp_name = "" + first_name + " " + last_name 
+        emp_name = "" + fName + " " + lName 
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(empID) + "_image_file"
         s3 = boto3.resource('s3')
