@@ -14,7 +14,7 @@
 
 
   <!-- Bootstrap core CSS -->
-  <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
@@ -60,7 +60,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="displayEmp.html">
+              <a class="nav-link" href="{{ url_for('displayEmployee') }}">
                 <span data-feather="monitor"></span>
                 Display Employees
               </a>
@@ -87,42 +87,42 @@
           <h1 class="h2">Add Employee</h1>
         </div>
 
-        <form action="/addemp" method="POST">
+        <form action="/addEmp" method="POST" enctype="multipart/form-data">
           <table style="text-align: center;">
             <tr>
               <td>Employee ID</td>
               <td>:</td>
-              <td><input type="text" id="empID" name="empID"></td>
+              <td><input type="text" name="empID"></td>
             </tr>
             <tr>
               <td>First Name</td>
               <td>:</td>
-              <td><input type="text" id="fname" name="fname"></td>
+              <td><input type="text" name="fName"></td>
             </tr>
             <tr>
               <td>Last Name</td>
               <td>:</td>
-              <td><input type="text" id="lname" name="lname"></td>
+              <td><input type="text" name="lName"></td>
             </tr>
             <tr>
               <td>Position</td>
               <td>:</td>
-              <td><input type="text" id="position" name="position"></td>
+              <td><input type="text" name="position"></td>
             </tr>
             <tr>
               <td>Payscale</td>
               <td>:</td>
-              <td><input type="text" id="payscale" name="payscale"></td>
+              <td><input type="number" name="payscale"></td>
             </tr>
             <tr>
               <td>Hire Date</td>
               <td>:</td>
-              <td><input type="text" id="hDate" name="hDate"></td>
+              <td><input type="text" name="hDate"></td>
             </tr>
             <tr>
               <td>Employee Image</td>
               <td>:</td>
-              <td><input type="file" id="empImage" name="empImage"></td>
+              <td><input type="file" name="empImage"></td>
             </tr>
             <tr>
               <td></td>
@@ -135,7 +135,7 @@
     </div>
   </div>
 
-  <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
     integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"

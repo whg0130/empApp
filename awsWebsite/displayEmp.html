@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
 
 
+
     <!-- Bootstrap core CSS -->
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -60,7 +61,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="displayEmp.html">
+                            <a class="nav-link" href="{{ url_for('displayEmployee') }}">
                                 <span data-feather="monitor"></span>
                                 Display Employees
                             </a>
@@ -84,9 +85,22 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Add Leave</h1>
+                    <h1 class="h2">Display Employee</h1>
                 </div>
+                <table>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </main>
+
         </div>
     </div>
 

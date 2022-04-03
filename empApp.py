@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from pymysql import connections
 import os
 import boto3
 from config import *
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='awsWebsite')
 
 bucket = custombucket
 region = customregion
@@ -20,22 +20,27 @@ db_conn = connections.Connection(
 output = {}
 table = 'Employee'
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def home():
     return render_template('index.html')
 
-@app.route("/addemp", methods=['POST'])
-def index():
+@app.route("/displayEmp")
+def displayEmployee():
+    return render_template('displayEmp.html')
+
+
+@app.route("/addEmp", methods=['POST'])
+def AddEmp():
     empID = request.form['empID']
     fName = request.form['fName']
     lName = request.form['lName']
     position = request.form['position']
     payscale = request.form['payscale']
-    hireDate = request.form['hireDate']
+    hireDate = request.form['hDate']
     
-    emp_image_file = request.files['emp_image_file']
+    emp_image_file = request.files['empImage']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %d, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -73,8 +78,16 @@ def index():
         cursor.close()
 
     print("all modification done...")
-    return render_template('AddEmpOutput.html', name=emp_name)
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
+
+
+@app.route("/displayEmp")
+def displayEmp():
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT * from employee")
+    data = cursor.fetchall()
+    render_template('displayEmp', data=data)
