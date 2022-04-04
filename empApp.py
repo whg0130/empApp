@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect
+from flask_bootstrap import Bootstrap
 from pymysql import connections
 import os
 import boto3
 from config import *
 
 app = Flask(__name__, template_folder='awsWebsite')
+Bootstrap(app)
 
 bucket = custombucket
 region = customregion
